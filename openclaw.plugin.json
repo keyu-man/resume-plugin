@@ -1,0 +1,29 @@
+{
+  "id": "plugin-first",
+  "name": "Plugin First",
+  "description": "Learning starter plugin: command + tool + RPC + CLI.",
+  "version": "0.1.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "greeting": {
+        "type": "string",
+        "default": "Hello from plugin-first!"
+      },
+      "shout": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  },
+  "uiHints": {
+    "greeting": {
+      "label": "Greeting",
+      "placeholder": "Hello from plugin-first!"
+    },
+    "shout": {
+      "label": "Uppercase responses"
+    }
+  }
+}

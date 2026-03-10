@@ -1,0 +1,14 @@
+{
+  "name": "plugin-first",
+  "version": "0.1.0",
+  "description": "Learning starter OpenClaw plugin: command + tool + RPC + CLI",
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.48"
+  }
+}
