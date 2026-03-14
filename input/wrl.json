@@ -1,0 +1,101 @@
+{
+  "name": "王润玲",
+  "name_py": "Wang Runling",
+  "sex": "女",
+  "age": "26",
+  "birth_date": "",
+  "work_year": "",
+  "mobile": "18457251901",
+  "email": "1370604532@qq.com",
+  "live_city": "",
+  "education": [
+    {
+      "start_date": "2019",
+      "end_date": "2023",
+      "school": "重庆人文科技学院",
+      "degree": "本科",
+      "major": "物联网工程"
+    }
+  ],
+  "skills": [
+    { "index": 1, "description": "熟练使用C语言进行DSP、STM32芯片开发" },
+    { "index": 2, "description": "熟练使用串口助手、网络助手、CAN分析软件、逻辑分析仪、示波器等调试工具" },
+    { "index": 3, "description": "熟悉UART、IIC、SPI、CAN/CANFD、TCP/IP、FSI等外设/通信协议" },
+    { "index": 4, "description": "能看懂硬件原理图与芯片数据手册，具备硬件调试与外设驱动调试能力" },
+    { "index": 5, "description": "了解数据逻辑开发流程与FreeRTOS开发流程" }
+  ],
+  "work_experience": [
+    {
+      "start_date": "2023.10",
+      "end_date": "至今",
+      "company": "北京索英电气技术有限公司",
+      "position": "嵌入式开发工程师",
+      "content": [
+        { "index": 1, "description": "基于F28M36重新调整程序架构，并基于F28388D重新设计平台程序" },
+        { "index": 2, "description": "重新搭建底层逻辑，设计三核数据流转交互；实现ADC采集、PWM发波/同步载波、SRAM存储、与FPGA交互" },
+        { "index": 3, "description": "实现USB外设、CAN/CANFD、FSI、SPI、Modbus 485、RTC/EEPROM等外设功能" }
+      ],
+      "achievement": [
+        { "index": 1, "description": "移植SD卡文件系统，以文件方式存储故障录波数据" },
+        { "index": 2, "description": "基于以太网1588 MII/RMII外设移植lwIP，实现上位机网络数据传输" },
+        { "index": 3, "description": "设计在线固件升级：规划内存分配，三核数据流转；C1核接收数据可升级多核程序" },
+        { "index": 4, "description": "基于F28388D设计CLA内核并与主核互通并行运行；联合FPGA故障处理逻辑，设计CMPSS外设实现保护功能替代部分硬件保护" }
+      ]
+    }
+  ],
+  "project_experience": [
+    {
+      "start_date": "2023.10",
+      "end_date": "至今",
+      "project_name": "F28M36架构调整与F28388D平台重构",
+      "role": "嵌入式/DSP开发",
+      "content": [
+        { "index": 1, "description": "重新搭建底层逻辑，设计三核间数据流转交互" },
+        { "index": 2, "description": "实现ADC采集、PWM发波与同步载波、SRAM数据存储、与FPGA数据交互" },
+        { "index": 3, "description": "实现USB、CAN/CANFD、FSI、SPI、Modbus 485、RTC/EEPROM等外设功能" }
+      ],
+      "achievement": [
+        { "index": 1, "description": "形成平台化程序运行框架，支持多外设与多核协同" }
+      ]
+    },
+    {
+      "start_date": "",
+      "end_date": "",
+      "project_name": "F28388D：SD卡文件系统 + 以太网lwIP通信",
+      "role": "嵌入式开发",
+      "content": [
+        { "index": 1, "description": "在F28388D上移植文件系统，用文件存储故障录波数据" },
+        { "index": 2, "description": "基于以太网1588 MII/RMII外设移植lwIP，实现上位机网络数据传输" }
+      ],
+      "achievement": [
+        { "index": 1, "description": "实现可落盘的录波数据管理与稳定的网络通信链路" }
+      ]
+    },
+    {
+      "start_date": "",
+      "end_date": "",
+      "project_name": "在线固件升级（多核程序升级）",
+      "role": "嵌入式开发",
+      "content": [
+        { "index": 1, "description": "重新规划芯片内存分配，使用上位机传输升级数据" },
+        { "index": 2, "description": "设计三核之间的数据流转，实现C1核接收数据后升级多核程序" }
+      ],
+      "achievement": [
+        { "index": 1, "description": "实现在线升级能力，降低维护成本与现场升级风险" }
+      ]
+    },
+    {
+      "start_date": "",
+      "end_date": "",
+      "project_name": "CLA并行计算与CMPSS保护功能设计",
+      "role": "嵌入式开发",
+      "content": [
+        { "index": 1, "description": "基于F28388D设计CLA内核并与主核互通，实现并行运行" },
+        { "index": 2, "description": "联合FPGA故障处理逻辑，设计CMPSS外设代替部分硬件保护功能" }
+      ],
+      "achievement": [
+        { "index": 1, "description": "提升并行处理能力与保护策略灵活性" }
+      ]
+    }
+  ]
+}

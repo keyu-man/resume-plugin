@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resume PDF Import"
+  short_description: "Convert raw resume PDFs into templated DOCX."
+  default_prompt: "Use $resume-pdf-import to extract this resume PDF, build data.json, and render output/result.docx."

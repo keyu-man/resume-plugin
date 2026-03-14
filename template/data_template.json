@@ -1,0 +1,66 @@
+{
+    "name": "",
+    "name_py": "",
+    "sex": "",
+    "age": "",
+    "birth_date": "",
+    "work_year": "",
+    "mobile": "",
+    "email": "",
+    "live_city": "",
+    "education": [
+        {
+            "start_date": "",
+            "end_date": "",
+            "school": "",
+            "degree": "",
+            "major": ""
+        }
+    ],
+    "skills": [
+        {
+            "index": 1,
+            "description": ""
+        }
+    ],
+    "work_experience": [
+        {
+            "start_date": "",
+            "end_date": "",
+            "company": "",
+            "position": "",
+            "content": [
+                {
+                    "index": 1,
+                    "description": ""
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": ""
+                }
+            ]
+        }
+    ],
+    "project_experience": [
+        {
+            "start_date": "",
+            "end_date": "",
+            "project_name": "",
+            "role": "",
+             "content": [
+                {
+                    "index": 1,
+                    "description": ""
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": ""
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,215 @@
+{
+    "name": "张三",
+    "name_py": "Zhang San",
+    "sex": "男",
+    "age": 23,
+    "birth_date": "1988年",
+    "work_year": "13",
+    "mobile": "13616063848",
+    "email": "597215824@qq.com",
+    "live_city": "成都",
+    "education": [
+        {
+            "start_date": "2007-09",
+            "end_date": "2011-07",
+            "school": "厦门理工学院",
+            "degree": "本科",
+            "major": "电子信息工程"
+        },
+        {
+            "start_date": "2007-09",
+            "end_date": "2011-07",
+            "school": "厦门理工学院",
+            "degree": "本科",
+            "major": "电子信息工程"
+        }
+    ],
+    "skills": [
+        {
+            "index": 1,
+            "description": "做事细心，责任心强，沟通协调能力强。"
+        },
+        {
+            "index": 2,
+            "description": "从事汽车电子行业工作13年，熟悉C语言，CAPL语言；熟练使用CANoe、tessy及QAC工具，熟悉UDS诊断协议、对ISO14229有深入了解。"
+        },
+        {
+            "index": 3,
+            "description": "对ISO26262有一定了解。"
+        },
+        {
+            "index": 4,
+            "description": "熟悉ASPICE流程，参与软件需求说明书、软件详细设计的编写与评审。"
+        }
+    ],
+    "work_experience": [
+        {
+            "start_date": "2012.12",
+            "end_date": "2025.12",
+            "company": "同致电子科技（厦门）有限公司",
+            "position": "嵌入式软件工程师",
+            "content": [
+                {
+                    "index": 1,
+                    "description": "制作软件需求分析说明书及参与评审；"
+                },
+                {
+                    "index": 2,
+                    "description":  "执行软件单元动态(Tessy)、静态(QAC)测试；"
+                },
+                {
+                    "index": 3,
+                    "description": "软件功能黑盒测试、诊断功能测试；"
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": "主要负责APA自动泊车系统软件需求分析、测试计划编写及评审、测试用例编写及评审、HIL测试环境搭建、CANoe台架仿真工程开发、执行软件单元动态静态测试。"
+                },
+                {
+                    "index": 2,
+                    "description":  "参与公司ASPICE体系建立并顺利通过认证。"
+                }
+            ]
+        }
+    ],
+    "project_experience": [
+        {
+            "start_date": "2022.06",
+            "end_date": "2025.12",
+            "project_name": "长城汽车HAP泊车系统",
+            "role": "软件工程师",
+            "content": [
+                {
+                    "index": 1,
+                    "description": "负责所有车型CANoe台架仿真工程的开发；"
+                },
+                {
+                    "index": 2,
+                    "description":  "负责实车监控工程开发；"
+                },
+                {
+                    "index": 3,
+                    "description": "实车CAN log数据分析；"
+                },
+                {
+                    "index": 4,
+                    "description": "ASPICE资料包括软件需求说明书、软件详细设计的制作及应对客户评审；"
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": "开发的台架工程及实车监控工程大大提高软件，算法及测试工程师的工作效率。"
+                },
+                {
+                    "index": 2,
+                    "description":  "应对客户软件质量评审、功能安全评审，确保项目正常运作。"
+                }
+            ]
+        },
+        {
+            "start_date": "2018.06",
+            "end_date": "2019.12",
+            "project_name": "长安汽车APA泊车系统",
+            "role": "测试工程师",
+            "content": [
+                {
+                    "index": 1,
+                    "description": "负责所有车型CANoe台架仿真工程的开发；"
+                },
+                {
+                    "index": 2,
+                    "description":  "负责实车监控工程开发；"
+                },
+                {
+                    "index": 3,
+                    "description": "实车CAN log数据分析；"
+                },
+                {
+                    "index": 4,
+                    "description": "ASPICE资料包括软件需求说明书、软件详细设计的制作及应对客户评审；"
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": "开发的台架工程及实车监控工程大大提高软件，算法及测试工程师的工作效率。"
+                },
+                {
+                    "index": 2,
+                    "description":  "应对客户软件质量评审、功能安全评审，确保项目正常运作。"
+                }
+            ]
+        },
+        {
+            "start_date": "2017.01",
+            "end_date": "2018.06",
+            "project_name": "吉利汽车APA3自动泊车系统",
+            "role": "测试工程师",
+            "content": [
+                {
+                    "index": 1,
+                    "description": "负责所有车型CANoe台架仿真工程的开发；"
+                },
+                {
+                    "index": 2,
+                    "description":  "负责实车监控工程开发；"
+                },
+                {
+                    "index": 3,
+                    "description": "实车CAN log数据分析；"
+                },
+                {
+                    "index": 4,
+                    "description": "ASPICE资料包括软件需求说明书、软件详细设计的制作及应对客户评审；"
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": "开发的台架工程及实车监控工程大大提高软件，算法及测试工程师的工作效率。"
+                },
+                {
+                    "index": 2,
+                    "description":  "应对客户软件质量评审、功能安全评审，确保项目正常运作。"
+                }
+            ]
+        },
+        {
+            "start_date": "2012.12",
+            "end_date": "2015.12",
+            "project_name": "通用全球半自动泊车系统",
+            "role": "测试工程师",
+            "content": [
+                {
+                    "index": 1,
+                    "description": "负责所有车型CANoe台架仿真工程的开发；"
+                },
+                {
+                    "index": 2,
+                    "description":  "负责实车监控工程开发；"
+                },
+                {
+                    "index": 3,
+                    "description": "实车CAN log数据分析；"
+                },
+                {
+                    "index": 4,
+                    "description": "ASPICE资料包括软件需求说明书、软件详细设计的制作及应对客户评审；"
+                }
+            ],
+            "achievement": [
+                {
+                    "index": 1,
+                    "description": "开发的台架工程及实车监控工程大大提高软件，算法及测试工程师的工作效率。"
+                },
+                {
+                    "index": 2,
+                    "description":  "应对客户软件质量评审、功能安全评审，确保项目正常运作。"
+                }
+            ]
+        }
+    ]
+}
