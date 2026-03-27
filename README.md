@@ -1,39 +1,39 @@
 # plugin-first
 
-A tiny **OpenClaw plugin** meant for learning /快速上手.
+一个用于学习/快速上手的 **OpenClaw 插件**（极简示例）。
 
-It demonstrates, in the smallest possible codebase:
+它在尽可能小的代码量里演示了：
 
-- a **plugin manifest** (`openclaw.plugin.json`)
-- an **auto-reply command** (`/first`)
-- an **agent tool** (`first_echo`, optional/opt-in)
-- a **Gateway RPC method** (`pluginfirst.ping`)
-- a **CLI command** (`openclaw plugin-first ...`)
-- a minimal **background service** (logs start/stop)
+- **插件清单（manifest）**：`openclaw.plugin.json`
+- 一个**自动回复命令**：`/first`
+- 一个 **Agent 工具**：`first_echo`（可选/需显式启用）
+- 一个 **Gateway RPC 方法**：`pluginfirst.ping`
+- 一个 **CLI 命令**：`openclaw plugin-first ...`
+- 一个最小化的**后台服务**（打印 start/stop 日志）
 
-## Install (local dev)
+## 安装（本地开发）
 
-Clone this repo, then install/link it into OpenClaw extensions:
+克隆仓库，然后将其安装/链接到 OpenClaw 的 extensions：
 
 ```bash
-# from your openclaw host
+# 在你的 openclaw 主机上
 git clone <YOUR_GITHUB_URL>
 cd plugin-first
 
-# link for development (no copy)
+# 以“开发链接”方式安装（不复制目录）
 openclaw plugins install -l .
 
-# or copy-install
+# 或者：复制安装
 # openclaw plugins install .
 
 openclaw plugins list
 ```
 
-Then enable it in your OpenClaw config and restart the Gateway.
+然后在 OpenClaw 配置中启用它，并重启 Gateway。
 
-### Config
+### 配置
 
-Add this to your `config.json5`:
+把下面内容加入你的 `config.json5`：
 
 ```js
 {
@@ -51,33 +51,33 @@ Add this to your `config.json5`:
 }
 ```
 
-Restart:
+重启：
 
 ```bash
 openclaw gateway restart
 ```
 
-## Use
+## 使用
 
-### 1) Command
+### 1）命令
 
-Send in any connected chat:
+在任意已连接的聊天里发送：
 
 - `/first`
 - `/first hello openclaw`
 
-### 2) CLI
+### 2）CLI
 
 ```bash
 openclaw plugin-first ping
 openclaw plugin-first show-config
 ```
 
-### 3) Tool (optional)
+### 3）工具（可选）
 
-This plugin registers an **optional** tool `first_echo`. Optional tools are **not enabled by default**.
+本插件注册了一个**可选**工具 `first_echo`。可选工具**默认不会启用**。
 
-Enable it (example) on the `main` agent:
+在 `main` agent 上启用它（示例）：
 
 ```js
 {
@@ -94,14 +94,14 @@ Enable it (example) on the `main` agent:
 }
 ```
 
-Then ask your agent to call it, e.g.:
+然后让你的 agent 调用它，例如：
 
-> Use the tool `first_echo` to repeat "hi" 3 times.
+> 使用工具 `first_echo` 把 “hi” 重复 3 次。
 
-## Development notes
+## 开发说明
 
-- The manifest (`openclaw.plugin.json`) is used for **config validation without executing code**.
-- `index.ts` is loaded at runtime via **jiti** (TypeScript is OK).
+- 插件清单（`openclaw.plugin.json`）用于**在不执行代码的前提下**做配置校验。
+- `index.ts` 由运行时通过 **jiti** 加载（支持 TypeScript）。
 
 ## License
 
