@@ -1,5 +1,5 @@
 {
-  "name": "resume-plugin",
+  "name": "resume",
   "version": "0.1.0",
   "description": "OpenClaw Resume plugin: render DOCX from template.docx + data.json",
   "license": "MIT",

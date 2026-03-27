@@ -16,7 +16,7 @@ Clone this repo, then install/link it into OpenClaw extensions:
 ```bash
 # from your openclaw host
 git clone <YOUR_GITHUB_URL>
-cd resume-plugin
+cd resume
 
 # link for development (no copy)
 openclaw plugins install -l .
@@ -67,8 +67,8 @@ Send in any connected chat:
 ### 2) CLI
 
 ```bash
-openclaw resume-plugin ping
-openclaw resume-plugin show-config
+openclaw resume ping
+openclaw resume show-config
 
 # render a docx
 openclaw resume parse --template template/template.docx --data template/data.json --output output/result.docx

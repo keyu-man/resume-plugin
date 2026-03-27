@@ -20,7 +20,7 @@
   "uiHints": {
     "greeting": {
       "label": "Greeting",
-      "placeholder": "Hello from resume-plugin!"
+      "placeholder": "Hello from resume!"
     },
     "shout": {
       "label": "Uppercase responses"

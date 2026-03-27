@@ -1,12 +1,12 @@
 import { Type } from "@sinclair/typebox";
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
 
-type ResumePluginConfig = {
+type ResumeConfig = {
   greeting?: string;
   shout?: boolean;
 };
 
-function parsePluginConfig(value: unknown): ResumePluginConfig {
+function parsePluginConfig(value: unknown): ResumeConfig {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   const raw = value as Record<string, unknown>;
   return {
@@ -31,22 +31,22 @@ const ResumeEchoToolSchema = Type.Object(
 );
 
 const plugin = {
-  id: "resume-plugin",
-  name: "Resume Plugin",
-  description: "Resume templating + import helpers (render DOCX from template.docx + data.json).",
+  id: "resume",
+  name: "Resume",
+  description: "Render DOCX resumes from template.docx + data.json.",
 
   // Note: config validation happens via openclaw.plugin.json (manifest).
   register(api: OpenClawPluginApi) {
     const cfg = parsePluginConfig(api.pluginConfig);
-    const greeting = cfg.greeting ?? "Hello from resume-plugin!";
+    const greeting = cfg.greeting ?? "Hello from resume!";
     const shout = cfg.shout ?? false;
 
     const format = (s: string) => (shout ? s.toUpperCase() : s);
 
-    // 1) Auto-reply command: /resume [anything]
+    // Chat command: /resume [anything]
     api.registerCommand({
       name: "resume",
-      description: "Demo command from resume-plugin. Usage: /resume hello",
+      description: "Demo command from resume plugin. Usage: /resume hello",
       acceptsArgs: true,
       requireAuth: false,
       handler: (ctx) => {
@@ -56,12 +56,12 @@ const plugin = {
       },
     });
 
-    // 2) Agent tool (optional): resume_echo
+    // Agent tool (optional): resume_echo
     api.registerTool(
       {
         name: "resume_echo",
         label: "Resume Echo",
-        description: "Echo back a message (demo tool from resume-plugin).",
+        description: "Echo back a message (demo tool from resume plugin).",
         parameters: ResumeEchoToolSchema,
         async execute(_toolCallId, params) {
           const text = String((params as any).text ?? "");
@@ -77,25 +77,25 @@ const plugin = {
       { optional: true },
     );
 
-    // 3) Gateway RPC method: resumeplugin.ping
-    api.registerGatewayMethod("resumeplugin.ping", ({ respond }) => {
+    // Gateway RPC method: resumetool.ping
+    api.registerGatewayMethod("resume.ping", ({ respond }) => {
       respond(true, {
         ok: true,
-        plugin: "resume-plugin",
+        plugin: "resume",
         ts: Date.now(),
       });
     });
 
-    // 4) CLI: openclaw resume-plugin ping
+    // CLI: openclaw resume ...
     api.registerCli(
       ({ program }) => {
-        const cmd = program.command("resume-plugin").description("Commands from the resume-plugin");
+        const cmd = program.command("resume").description("Resume tools");
 
         cmd
           .command("ping")
           .description("Print a local pong (does not call the Gateway)")
           .action(() => {
-            console.log("pong (resume-plugin)");
+            console.log("pong (resume)");
           });
 
         cmd
@@ -104,20 +104,8 @@ const plugin = {
           .action(() => {
             console.log(JSON.stringify({ greeting, shout }, null, 2));
           });
-      },
-      { commands: ["resume-plugin"] },
-    );
 
-    // 5) CLI: openclaw resume parse
-    // Renders a DOCX using template.docx + data.json into result.docx.
-    // Template syntax matches the resume-pdf-import skill:
-    //   - variables: {name}
-    //   - sections: {#skills}...{/skills}
-    api.registerCli(
-      ({ program }) => {
-        program
-          .command("resume")
-          .description("Resume templating helpers")
+        cmd
           .command("parse")
           .description("Render a resume DOCX using a template.docx and data.json")
           .requiredOption("--template <path>", "Path to template .docx")
@@ -152,6 +140,7 @@ const plugin = {
               delimiters: { start: "{", end: "}" },
             });
 
+            // docxtemplater warns that setData is deprecated, but it's still supported.
             doc.setData(data);
 
             try {
@@ -170,14 +159,13 @@ const plugin = {
       { commands: ["resume"] },
     );
 
-    // 6) Background service
     api.registerService({
-      id: "resume-plugin",
+      id: "resume",
       start: () => {
-        api.logger.info(`[resume-plugin] started (greeting=${JSON.stringify(greeting)})`);
+        api.logger.info(`[resume] started (greeting=${JSON.stringify(greeting)})`);
       },
       stop: () => {
-        api.logger.info("[resume-plugin] stopped");
+        api.logger.info("[resume] stopped");
       },
     });
   },
