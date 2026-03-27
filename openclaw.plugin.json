@@ -1,7 +1,7 @@
 {
-  "id": "plugin-first",
-  "name": "Plugin First",
-  "description": "Learning starter plugin: command + tool + RPC + CLI.",
+  "id": "resume-plugin",
+  "name": "Resume Plugin",
+  "description": "Resume templating + import helpers (render DOCX from template.docx + data.json).",
   "version": "0.1.0",
   "configSchema": {
     "type": "object",
@@ -9,7 +9,7 @@
     "properties": {
       "greeting": {
         "type": "string",
-        "default": "Hello from plugin-first!"
+        "default": "Hello from resume-plugin!"
       },
       "shout": {
         "type": "boolean",
@@ -20,7 +20,7 @@
   "uiHints": {
     "greeting": {
       "label": "Greeting",
-      "placeholder": "Hello from plugin-first!"
+      "placeholder": "Hello from resume-plugin!"
     },
     "shout": {
       "label": "Uppercase responses"

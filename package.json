@@ -1,7 +1,7 @@
 {
-  "name": "plugin-first",
+  "name": "resume-plugin",
   "version": "0.1.0",
-  "description": "Learning starter OpenClaw plugin: command + tool + RPC + CLI",
+  "description": "OpenClaw Resume plugin: render DOCX from template.docx + data.json",
   "license": "MIT",
   "type": "module",
   "private": false,

@@ -1,12 +1,12 @@
 import { Type } from "@sinclair/typebox";
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
 
-type PluginFirstConfig = {
+type ResumePluginConfig = {
   greeting?: string;
   shout?: boolean;
 };
 
-function parsePluginConfig(value: unknown): PluginFirstConfig {
+function parsePluginConfig(value: unknown): ResumePluginConfig {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   const raw = value as Record<string, unknown>;
   return {
@@ -15,7 +15,7 @@ function parsePluginConfig(value: unknown): PluginFirstConfig {
   };
 }
 
-const FirstEchoToolSchema = Type.Object(
+const ResumeEchoToolSchema = Type.Object(
   {
     text: Type.String({ description: "Text to echo back" }),
     times: Type.Optional(
@@ -31,23 +31,22 @@ const FirstEchoToolSchema = Type.Object(
 );
 
 const plugin = {
-  id: "plugin-first",
-  name: "Plugin First",
-  description: "Learning starter plugin: command + tool + RPC + CLI.",
+  id: "resume-plugin",
+  name: "Resume Plugin",
+  description: "Resume templating + import helpers (render DOCX from template.docx + data.json).",
 
   // Note: config validation happens via openclaw.plugin.json (manifest).
-  // This parser is just for runtime convenience.
   register(api: OpenClawPluginApi) {
     const cfg = parsePluginConfig(api.pluginConfig);
-    const greeting = cfg.greeting ?? "Hello from plugin-first!";
+    const greeting = cfg.greeting ?? "Hello from resume-plugin!";
     const shout = cfg.shout ?? false;
 
     const format = (s: string) => (shout ? s.toUpperCase() : s);
 
-    // 1) Auto-reply command: /first [anything]
+    // 1) Auto-reply command: /resume [anything]
     api.registerCommand({
-      name: "first",
-      description: "Demo command from plugin-first. Usage: /first hello",
+      name: "resume",
+      description: "Demo command from resume-plugin. Usage: /resume hello",
       acceptsArgs: true,
       requireAuth: false,
       handler: (ctx) => {
@@ -57,16 +56,15 @@ const plugin = {
       },
     });
 
-    // 2) Agent tool (optional): first_echo
-    // Enable via tools/agent allowlists (see README).
+    // 2) Agent tool (optional): resume_echo
     api.registerTool(
       {
-        name: "first_echo",
-        label: "First Echo",
-        description: "Echo back a message (demo tool from plugin-first).",
-        parameters: FirstEchoToolSchema,
+        name: "resume_echo",
+        label: "Resume Echo",
+        description: "Echo back a message (demo tool from resume-plugin).",
+        parameters: ResumeEchoToolSchema,
         async execute(_toolCallId, params) {
-          const text = String(params.text ?? "");
+          const text = String((params as any).text ?? "");
           const timesRaw = Number((params as any).times ?? 1);
           const times = Number.isFinite(timesRaw) ? Math.min(5, Math.max(1, timesRaw)) : 1;
           const out = Array.from({ length: times }, () => text).join("\n");
@@ -79,28 +77,25 @@ const plugin = {
       { optional: true },
     );
 
-    // 3) Gateway RPC method: pluginfirst.ping
-    api.registerGatewayMethod("pluginfirst.ping", ({ respond }) => {
+    // 3) Gateway RPC method: resumeplugin.ping
+    api.registerGatewayMethod("resumeplugin.ping", ({ respond }) => {
       respond(true, {
         ok: true,
-        plugin: "plugin-first",
+        plugin: "resume-plugin",
         ts: Date.now(),
       });
     });
 
-    // 4) CLI: openclaw plugin-first ping
+    // 4) CLI: openclaw resume-plugin ping
     api.registerCli(
       ({ program }) => {
-        const cmd = program
-          .command("plugin-first")
-          .description("Commands from the plugin-first learning plugin");
+        const cmd = program.command("resume-plugin").description("Commands from the resume-plugin");
 
         cmd
           .command("ping")
           .description("Print a local pong (does not call the Gateway)")
           .action(() => {
-            // Keep it simple: CLI commands are just another plugin surface.
-            console.log("pong (plugin-first)");
+            console.log("pong (resume-plugin)");
           });
 
         cmd
@@ -109,9 +104,8 @@ const plugin = {
           .action(() => {
             console.log(JSON.stringify({ greeting, shout }, null, 2));
           });
-
       },
-      { commands: ["plugin-first"] },
+      { commands: ["resume-plugin"] },
     );
 
     // 5) CLI: openclaw resume parse
@@ -135,9 +129,9 @@ const plugin = {
             const Docxtemplater = (await import("docxtemplater")).default;
             const PizZip = (await import("pizzip")).default;
 
-            const templatePath = path.resolve(String(opts.template));
-            const dataPath = path.resolve(String(opts.data));
-            const outputPath = path.resolve(String(opts.output));
+            const templatePath = path.resolve(String((opts as any).template));
+            const dataPath = path.resolve(String((opts as any).data));
+            const outputPath = path.resolve(String((opts as any).output));
 
             const [templateBuf, dataRaw] = await Promise.all([
               fs.readFile(templatePath),
@@ -151,8 +145,6 @@ const plugin = {
               throw new Error(`Failed to parse JSON from --data: ${dataPath}`);
             }
 
-            // docxtemplater supports custom delimiters; we keep skill-compatible
-            // single braces by setting delimiters to { }.
             const zip = new PizZip(templateBuf);
             const doc = new Docxtemplater(zip, {
               paragraphLoop: true,
@@ -178,14 +170,14 @@ const plugin = {
       { commands: ["resume"] },
     );
 
-    // 6) Background service (just logs once on start)
+    // 6) Background service
     api.registerService({
-      id: "plugin-first",
+      id: "resume-plugin",
       start: () => {
-        api.logger.info(`[plugin-first] started (greeting=${JSON.stringify(greeting)})`);
+        api.logger.info(`[resume-plugin] started (greeting=${JSON.stringify(greeting)})`);
       },
       stop: () => {
-        api.logger.info("[plugin-first] stopped");
+        api.logger.info("[resume-plugin] stopped");
       },
     });
   },

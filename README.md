@@ -1,15 +1,13 @@
-# plugin-first
+# resume-plugin
 
-A tiny **OpenClaw plugin** meant for learning /快速上手.
+An **OpenClaw resume plugin** that can render a DOCX using a `template.docx` + `data.json` (the format used by the `resume-pdf-import` skill).
 
-It demonstrates, in the smallest possible codebase:
+It includes:
 
 - a **plugin manifest** (`openclaw.plugin.json`)
-- an **auto-reply command** (`/first`)
-- an **agent tool** (`first_echo`, optional/opt-in)
-- a **Gateway RPC method** (`pluginfirst.ping`)
-- a **CLI command** (`openclaw plugin-first ...`)
-- a minimal **background service** (logs start/stop)
+- a **DOCX render CLI** (`openclaw resume parse ...`)
+- a small **CLI namespace** (`openclaw resume-plugin ...`)
+- optional demo **command/tool/RPC** surfaces
 
 ## Install (local dev)
 
@@ -18,7 +16,7 @@ Clone this repo, then install/link it into OpenClaw extensions:
 ```bash
 # from your openclaw host
 git clone <YOUR_GITHUB_URL>
-cd plugin-first
+cd resume-plugin
 
 # link for development (no copy)
 openclaw plugins install -l .
@@ -39,7 +37,7 @@ Add this to your `config.json5`:
 {
   plugins: {
     entries: {
-      "plugin-first": {
+      "resume-plugin": {
         enabled: true,
         config: {
           greeting: "Hello!",
@@ -63,19 +61,22 @@ openclaw gateway restart
 
 Send in any connected chat:
 
-- `/first`
-- `/first hello openclaw`
+- `/resume`
+- `/resume hello openclaw`
 
 ### 2) CLI
 
 ```bash
-openclaw plugin-first ping
-openclaw plugin-first show-config
+openclaw resume-plugin ping
+openclaw resume-plugin show-config
+
+# render a docx
+openclaw resume parse --template template/template.docx --data template/data.json --output output/result.docx
 ```
 
 ### 3) Tool (optional)
 
-This plugin registers an **optional** tool `first_echo`. Optional tools are **not enabled by default**.
+This plugin registers an **optional** tool `resume_echo`. Optional tools are **not enabled by default**.
 
 Enable it (example) on the `main` agent:
 
@@ -86,7 +87,7 @@ Enable it (example) on the `main` agent:
       {
         id: "main",
         tools: {
-          allow: ["first_echo"],
+          allow: ["resume_echo"],
         },
       },
     ],
@@ -96,7 +97,7 @@ Enable it (example) on the `main` agent:
 
 Then ask your agent to call it, e.g.:
 
-> Use the tool `first_echo` to repeat "hi" 3 times.
+> Use the tool `resume_echo` to repeat "hi" 3 times.
 
 ## Development notes
 
