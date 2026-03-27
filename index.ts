@@ -109,11 +109,76 @@ const plugin = {
           .action(() => {
             console.log(JSON.stringify({ greeting, shout }, null, 2));
           });
+
       },
       { commands: ["plugin-first"] },
     );
 
-    // 5) Background service (just logs once on start)
+    // 5) CLI: openclaw resume parse
+    // Renders a DOCX using template.docx + data.json into result.docx.
+    // Template syntax matches the resume-pdf-import skill:
+    //   - variables: {name}
+    //   - sections: {#skills}...{/skills}
+    api.registerCli(
+      ({ program }) => {
+        program
+          .command("resume")
+          .description("Resume templating helpers")
+          .command("parse")
+          .description("Render a resume DOCX using a template.docx and data.json")
+          .requiredOption("--template <path>", "Path to template .docx")
+          .requiredOption("--data <path>", "Path to data .json")
+          .requiredOption("--output <path>", "Output .docx path")
+          .action(async (opts) => {
+            const fs = await import("node:fs/promises");
+            const path = await import("node:path");
+            const Docxtemplater = (await import("docxtemplater")).default;
+            const PizZip = (await import("pizzip")).default;
+
+            const templatePath = path.resolve(String(opts.template));
+            const dataPath = path.resolve(String(opts.data));
+            const outputPath = path.resolve(String(opts.output));
+
+            const [templateBuf, dataRaw] = await Promise.all([
+              fs.readFile(templatePath),
+              fs.readFile(dataPath, "utf8"),
+            ]);
+
+            let data: any;
+            try {
+              data = JSON.parse(dataRaw);
+            } catch {
+              throw new Error(`Failed to parse JSON from --data: ${dataPath}`);
+            }
+
+            // docxtemplater supports custom delimiters; we keep skill-compatible
+            // single braces by setting delimiters to { }.
+            const zip = new PizZip(templateBuf);
+            const doc = new Docxtemplater(zip, {
+              paragraphLoop: true,
+              linebreaks: true,
+              delimiters: { start: "{", end: "}" },
+            });
+
+            doc.setData(data);
+
+            try {
+              doc.render();
+            } catch (e: any) {
+              const msg = e?.message ?? String(e);
+              throw new Error(`Template render failed: ${msg}`);
+            }
+
+            const outBuf = doc.getZip().generate({ type: "nodebuffer" });
+            await fs.mkdir(path.dirname(outputPath), { recursive: true });
+            await fs.writeFile(outputPath, outBuf);
+            console.log(outputPath);
+          });
+      },
+      { commands: ["resume"] },
+    );
+
+    // 6) Background service (just logs once on start)
     api.registerService({
       id: "plugin-first",
       start: () => {

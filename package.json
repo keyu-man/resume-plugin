@@ -9,6 +9,8 @@
     "extensions": ["./index.ts"]
   },
   "dependencies": {
-    "@sinclair/typebox": "^0.34.48"
+    "@sinclair/typebox": "^0.34.48",
+    "docxtemplater": "^3.66.2",
+    "pizzip": "^3.2.0"
   }
 }
